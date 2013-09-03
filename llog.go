@@ -48,8 +48,8 @@ type Log struct {
 
 // New creates a new instance of Log that will log to the provided io.Writer only if the method used
 // for logging is enabled for the provided level. See package documentation for more details and examples.
-func New(w io.Writer, l Level) Log {
-	return Log{w: w, level: l}
+func New(w io.Writer, l Level) *Log {
+	return &Log{w: w, level: l}
 }
 
 // SetLevel changes the logging level for the log instance.
