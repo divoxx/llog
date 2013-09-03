@@ -52,6 +52,11 @@ func New(w io.Writer, l Level) Log {
 	return Log{w: w, level: l}
 }
 
+// SetLevel changes the logging level for the log instance.
+func (l *Log) SetLeveL(l Level) {
+	l.level = Level
+}
+
 // Debug writes to the Log only if the log's level is set to Debug.
 func (l *Log) Debug(msg ...interface{}) error {
 	return l.log(DEBUG, msg...)
