@@ -24,15 +24,15 @@ var (
 
 // Log is an instance of a Log with a specific level set.
 type Log struct {
-	sync.Mutex
-	io.Writer
+	m     sync.Mutex
+	w     io.Writer
 	level Level
 }
 
 // New creates a new instance of Log that will log to the provided io.Writer only if the method used
 // for logging is enabled for the provided level.
 func New(w io.Writer, l Level) Log {
-	return Log{Writer: w, level: l}
+	return Log{w: w, level: l}
 }
 
 // Debug writes to the Log only if the log's level is set to Debug.
@@ -81,9 +81,9 @@ func (l *Log) log(level Level, msg ...interface{}) error {
 		return nil
 	}
 
-	l.Lock()
-	_, err := fmt.Fprintln(l, msg...)
-	l.Unlock()
+	l.m.Lock()
+	_, err := fmt.Fprintln(l.w, msg...)
+	l.m.Unlock()
 	return err
 }
 
@@ -95,8 +95,8 @@ func (l *Log) logf(level Level, fmtStr string, msg ...interface{}) error {
 
 	fmtStr = fmtStr + "\n"
 
-	l.Lock()
-	_, err := fmt.Fprintf(l, fmtStr, msg...)
-	l.Unlock()
+	l.m.Lock()
+	_, err := fmt.Fprintf(l.w, fmtStr, msg...)
+	l.m.Unlock()
 	return err
 }
