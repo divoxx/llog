@@ -53,7 +53,7 @@ func New(w io.Writer, l Level) Log {
 }
 
 // SetLevel changes the logging level for the log instance.
-func (l *Log) SetLeveL(lvl Level) {
+func (l *Log) SetLevel(lvl Level) {
 	l.level = lvl
 }
 
