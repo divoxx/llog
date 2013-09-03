@@ -1,3 +1,19 @@
+/*
+llog is a simple and straightforward implementation of leveled logs for go.
+
+The levels are defined as follow: Debug < Info < Warning < Error.
+
+A call to any of the logging methods will only append to the log if the level
+represented by the method is higher or equal to the level set in the Log instance.
+
+For example: a Log w/ level Warning will only append to the log any call to Error,
+Errorf, Warning and Warningf. All other calls will be ignored.
+
+	l := llog.New(os.Stdout, llog.Warning)
+	l.Warning("Something wrong occurred")	// Gets logged
+	l.Info("You might like to know this")	// Doesn't get logged
+
+*/
 package llog
 
 import (
@@ -22,7 +38,8 @@ var (
 	levelPrefix = [4]rune{'D', 'I', 'W', 'E'}
 )
 
-// Log is an instance of a Log with a specific level set.
+// Log is an instance that contains a reference to an io.Writer and a level set. For more info,
+// check New documentation.
 type Log struct {
 	m     sync.Mutex
 	w     io.Writer
@@ -30,7 +47,7 @@ type Log struct {
 }
 
 // New creates a new instance of Log that will log to the provided io.Writer only if the method used
-// for logging is enabled for the provided level.
+// for logging is enabled for the provided level. See package documentation for more details and examples.
 func New(w io.Writer, l Level) Log {
 	return Log{w: w, level: l}
 }
