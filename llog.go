@@ -9,7 +9,7 @@ represented by the method is higher or equal to the level set in the Log instanc
 For example: a Log w/ level Warning will only append to the log any call to Error,
 Errorf, Warning and Warningf. All other calls will be ignored.
 
-	l := llog.New(os.Stdout, llog.Warning)
+	l := llog.New(os.Stdout, llog.WARNING)
 	l.Warning("Something wrong occurred")	// Gets logged
 	l.Info("You might like to know this")	// Doesn't get logged
 
