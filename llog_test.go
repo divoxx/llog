@@ -8,7 +8,7 @@ import (
 
 func TestOnlyErrorLogging(t *testing.T) {
 	b := new(bytes.Buffer)
-	l := New(b, Error)
+	l := New(b, ERROR)
 
 	logAndAssertNoError(t, l.Error, "Error")
 	logfAndAssertNoError(t, l.Errorf, "%s", "Errorf")
@@ -27,7 +27,7 @@ func TestOnlyErrorLogging(t *testing.T) {
 
 func TestWarningOrHigher(t *testing.T) {
 	b := new(bytes.Buffer)
-	l := New(b, Warning)
+	l := New(b, WARNING)
 
 	logAndAssertNoError(t, l.Error, "Error")
 	logfAndAssertNoError(t, l.Errorf, "%s", "Errorf")
@@ -46,7 +46,7 @@ func TestWarningOrHigher(t *testing.T) {
 
 func TestInfoOrHigher(t *testing.T) {
 	b := new(bytes.Buffer)
-	l := New(b, Info)
+	l := New(b, INFO)
 
 	logAndAssertNoError(t, l.Error, "Error")
 	logfAndAssertNoError(t, l.Errorf, "%s", "Errorf")
@@ -65,7 +65,7 @@ func TestInfoOrHigher(t *testing.T) {
 
 func TestDebugOrHigher(t *testing.T) {
 	b := new(bytes.Buffer)
-	l := New(b, Debug)
+	l := New(b, DEBUG)
 
 	logAndAssertNoError(t, l.Error, "Error")
 	logfAndAssertNoError(t, l.Errorf, "%s", "Errorf")

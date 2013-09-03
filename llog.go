@@ -27,10 +27,10 @@ type Level uint8
 
 // Definitions of available levels: Debug < Info < Warning < Error.
 const (
-	Debug Level = iota
-	Info
-	Warning
-	Error
+	DEBUG Level = iota
+	INFO
+	WARNING
+	ERROR
 )
 
 var (
@@ -54,42 +54,42 @@ func New(w io.Writer, l Level) Log {
 
 // Debug writes to the Log only if the log's level is set to Debug.
 func (l *Log) Debug(msg ...interface{}) error {
-	return l.log(Debug, msg...)
+	return l.log(DEBUG, msg...)
 }
 
 // Debugf writes a message formatted (as fmt.Printf) to the Log only if the log's level is set to Debug.
 func (l *Log) Debugf(fmtStr string, msg ...interface{}) error {
-	return l.logf(Debug, fmtStr, msg...)
+	return l.logf(DEBUG, fmtStr, msg...)
 }
 
 // Info writes to the Log only if the log's level is set to Info.
 func (l *Log) Info(msg ...interface{}) error {
-	return l.log(Info, msg...)
+	return l.log(INFO, msg...)
 }
 
 // Infof writes a message formatted (as fmt.Printf) to the Log only if the log's level is set to Info.
 func (l *Log) Infof(fmtStr string, msg ...interface{}) error {
-	return l.logf(Info, fmtStr, msg...)
+	return l.logf(INFO, fmtStr, msg...)
 }
 
 // Warning writes to the Log only if the log's level is set to Warning.
 func (l *Log) Warning(msg ...interface{}) error {
-	return l.log(Warning, msg...)
+	return l.log(WARNING, msg...)
 }
 
 // Warningf writes a message formatted (as fmt.Printf) to the Log only if the log's level is set to Warning.
 func (l *Log) Warningf(fmtStr string, msg ...interface{}) error {
-	return l.logf(Warning, fmtStr, msg...)
+	return l.logf(WARNING, fmtStr, msg...)
 }
 
 // Error writes to the Log only if the log's level is set to Error.
 func (l *Log) Error(msg ...interface{}) error {
-	return l.log(Error, msg...)
+	return l.log(ERROR, msg...)
 }
 
 // Errorf writes a message formatted (as fmt.Printf) to the Log only if the log's level is set to Error.
 func (l *Log) Errorf(fmtStr string, msg ...interface{}) error {
-	return l.logf(Error, fmtStr, msg...)
+	return l.logf(ERROR, fmtStr, msg...)
 }
 
 // log is called by all the other leveled logging functions.
