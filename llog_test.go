@@ -82,6 +82,17 @@ func TestDebugOrHigher(t *testing.T) {
 	verifyLogEntries(t, b, "Error", "Errorf", "Warning", "Warningf", "Info", "Infof", "Debug", "Debugf")
 }
 
+func TestSetLevel(t *testing.T) {
+	b := new(bytes.Buffer)
+	l := New(b, INFO)
+
+	logAndAssertNoError(t, l.Debug, "Error")
+	l.SetLevel(DEBUG)
+	logAndAssertNoError(t, l.Debug, "Error")
+
+	verifyLogEntries(t, b, "Error")
+}
+
 func logAndAssertNoError(t *testing.T, fn func(...interface{}) error, msg ...interface{}) {
 	err := fn(msg...)
 	if err != nil {
